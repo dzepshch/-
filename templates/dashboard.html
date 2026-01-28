@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% set show_navbar = True %}
+
+{% block content %}
+<div class="container" style="padding-top: 2rem;">
+    <h1 style="margin-bottom: 2rem;">Добро пожаловать, {{ session.username }}!</h1>
+    
+    <!-- Статистика -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-value">{{ stats.tests_taken or 0 }}</div>
+            <div class="stat-label">Пройдено тестов</div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-value">{{ "%.1f"|format(stats.avg_score or 0) }}%</div>
+            <div class="stat-label">Средний результат</div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-value">{{ (stats.total_time or 0) // 60 }}</div>
+            <div class="stat-label">Минут в обучении</div>
+        </div>
+    </div>
+    
+    <!-- Доступные тесты -->
+    <h2 style="margin-bottom: 1.5rem;">Доступные тесты</h2>
+    <div class="test-list">
+        {% if tests %}
+            {% for test in tests %}
+            <div class="test-item">
+                <h3 class="test-title">{{ test.title }}</h3>
+                <p class="test-description">{{ test.description or 'Нет описания' }}</p>
+                <div class="test-actions">
+                    <a href="{{ url_for('test_page', test_id=test.id) }}" class="btn btn-primary">
+                        Начать тест
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="card">
+                <p class="card-body">Пока нет доступных тестов</p>
+            </div>
+        {% endif %}
+    </div>
+    
+    <!-- Последние результаты -->
+    {% if recent_results %}
+    <h2 style="margin-top: 3rem; margin-bottom: 1.5rem;">Последние результаты</h2>
+    <div class="card">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Тест</th>
+                    <th>Результат</th>
+                    <th>Время</th>
+                    <th>Дата</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in recent_results %}
+                <tr>
+                    <td>{{ result.title }}</td>
+                    <td>
+                        <span style="font-weight: 600; color: var(--primary-green);">
+                            {{ result.score }}/{{ result.total_questions }}
+                        </span>
+                        ({{ "%.1f"|format(result.score / result.total_questions * 100) }}%)
+                    </td>
+                    <td>{{ result.time_spent or 0 }} сек</td>
+                    <td>{{ result.completed_at[:16] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

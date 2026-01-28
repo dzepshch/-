@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% set show_navbar = True %}
+
+{% block content %}
+<div class="container" style="padding-top: 2rem;">
+    <!-- Настройки теста -->
+    <div id="testSettings" class="card">
+        <h2 class="card-header">{{ test.title }}</h2>
+        <p class="card-body">{{ test.description or 'Нет описания' }}</p>
+        
+        <div class="form-group">
+            <label class="form-label">Настройки таймера</label>
+            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                <label style="display: flex; align-items: center; cursor: pointer;">
+                    <input type="radio" name="timerMode" value="none" checked class="form-checkbox">
+                    <span>Без таймера</span>
+                </label>
+                <label style="display: flex; align-items: center; cursor: pointer;">
+                    <input type="radio" name="timerMode" value="perQuestion" class="form-checkbox">
+                    <span>Таймер на каждый вопрос (60 секунд)</span>
+                </label>
+                <label style="display: flex; align-items: center; cursor: pointer;">
+                    <input type="radio" name="timerMode" value="total" class="form-checkbox">
+                    <span>Таймер на весь тест</span>
+                </label>
+            </div>
+            
+            <div id="totalTimeInput" class="hidden" style="margin-top: 1rem;">
+                <label class="form-label" for="totalTime">Время на тест (минуты)</label>
+                <input type="number" id="totalTime" class="form-input" value="30" min="1" style="max-width: 200px;">
+            </div>
+        </div>
+        
+        <button id="startTestBtn" class="btn btn-primary" style="margin-top: 1rem;">
+            Начать тест
+        </button>
+    </div>
+    
+    <!-- Тест -->
+    <div id="testContainer" class="hidden">
+        <!-- Таймер -->
+        <div id="timer" class="timer hidden">00:00</div>
+        
+        <!-- Прогресс -->
+        <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                <span style="font-weight: 500;">Вопрос <span id="currentQuestion">1</span> из <span id="totalQuestions">0</span></span>
+                <span id="timerDisplay" class="hidden" style="font-weight: 600; color: var(--primary-green);"></span>
+            </div>
+            <div class="progress-bar">
+                <div id="progressFill" class="progress-fill" style="width: 0%;"></div>
+            </div>
+        </div>
+        
+        <!-- Вопрос -->
+        <div id="questionContainer" class="question-container"></div>
+        
+        <!-- Навигация -->
+        <div class="question-nav">
+            <button id="prevBtn" class="btn btn-secondary" disabled>
+                ← Предыдущий
+            </button>
+            <button id="showAnswerBtn" class="btn btn-secondary">
+                Показать правильный ответ
+            </button>
+            <button id="nextBtn" class="btn btn-primary">
+                Следующий →
+            </button>
+        </div>
+        
+        <!-- Навигация по номерам -->
+        <div class="card">
+            <div class="card-header">Навигация по вопросам</div>
+            <div id="questionNumbers" class="question-numbers"></div>
+        </div>
+    </div>
+    
+    <!-- Результаты -->
+    <div id="resultsContainer" class="hidden">
+        <div class="card text-center">
+            <h2 class="card-header">Тест завершен!</h2>
+            <div style="margin: 2rem 0;">
+                <div class="stat-value" id="finalScore">0/0</div>
+                <div class="stat-label">Правильных ответов</div>
+                <div style="margin-top: 1rem; font-size: 1.5rem; font-weight: 600; color: var(--primary-green);">
+                    <span id="finalPercentage">0</span>%
+                </div>
+            </div>
+            <div style="display: flex; gap: 1rem; justify-content: center;">
+                <a href="{{ url_for('dashboard') }}" class="btn btn-primary">
+                    Вернуться к тестам
+                </a>
+                <button id="retryBtn" class="btn btn-secondary">
+                    Пройти заново
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Модальное окно для правильного ответа -->
+<div id="answerModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">Правильный ответ</div>
+        <div id="answerModalBody" class="modal-body"></div>
+        <div class="modal-actions">
+            <button id="closeModalBtn" class="btn btn-primary">Закрыть</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const TEST_ID = {{ test.id }};
+</script>
+<script src="{{ url_for('static', filename='js/test.js') }}"></script>
+{% endblock %}

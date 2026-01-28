@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Онлайн-тренажер тестов{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    {% if show_navbar %}
+    <nav class="navbar">
+        <div class="container">
+            <a href="{{ url_for('index') }}" class="navbar-brand">📝 Тренажер тестов</a>
+            <div class="navbar-menu">
+                {% if session.user_id %}
+                    <a href="{{ url_for('dashboard') }}" class="navbar-link">Мои тесты</a>
+                    <span class="navbar-link">{{ session.username }}</span>
+                    <a href="{{ url_for('logout') }}" class="navbar-link">Выход</a>
+                {% else %}
+                    <a href="{{ url_for('login') }}" class="navbar-link">Вход</a>
+                    <a href="{{ url_for('register') }}" class="btn btn-primary">Регистрация</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+    {% endif %}
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>

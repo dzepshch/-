@@ -1,0 +1,40 @@
+{
+  "questions": [
+    {
+      "text": "Что изображено на этой картинке?",
+      "order": 1,
+      "is_multiple": false,
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/200px-Python-logo-notext.svg.png",
+      "answers": [
+        {"text": "Логотип Python", "is_correct": true},
+        {"text": "Логотип JavaScript", "is_correct": false},
+        {"text": "Логотип Java", "is_correct": false},
+        {"text": "Логотип Ruby", "is_correct": false}
+      ]
+    },
+    {
+      "text": "Какие из этих операционных систем являются Unix-подобными?",
+      "order": 2,
+      "is_multiple": true,
+      "image": null,
+      "answers": [
+        {"text": "Linux", "is_correct": true},
+        {"text": "macOS", "is_correct": true},
+        {"text": "Windows", "is_correct": false},
+        {"text": "FreeBSD", "is_correct": true}
+      ]
+    },
+    {
+      "text": "Какой HTTP статус код означает 'Не найдено'?",
+      "order": 3,
+      "is_multiple": false,
+      "image": null,
+      "answers": [
+        {"text": "200", "is_correct": false},
+        {"text": "301", "is_correct": false},
+        {"text": "404", "is_correct": true},
+        {"text": "500", "is_correct": false}
+      ]
+    }
+  ]
+}

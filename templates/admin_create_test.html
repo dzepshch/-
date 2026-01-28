@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% set show_navbar = False %}
+
+{% block content %}
+<nav class="navbar">
+    <div class="container">
+        <a href="{{ url_for('admin_panel') }}" class="navbar-brand">🔧 Админ-панель</a>
+        <div class="navbar-menu">
+            <a href="{{ url_for('admin_panel') }}" class="navbar-link">← Назад</a>
+            <a href="{{ url_for('admin_logout') }}" class="navbar-link">Выход</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container" style="max-width: 800px; padding-top: 2rem;">
+    <h1 style="margin-bottom: 2rem;">Создать новый тест</h1>
+    
+    <div class="card">
+        <form id="createTestForm">
+            <div class="form-group">
+                <label class="form-label" for="title">Название теста</label>
+                <input type="text" id="title" name="title" class="form-input" required>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="description">Описание</label>
+                <textarea id="description" name="description" class="form-input" rows="3"></textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Создать тест</button>
+        </form>
+    </div>
+    
+    <div id="uploadSection" class="hidden" style="margin-top: 2rem;">
+        <div class="card">
+            <h3 class="card-header">Загрузить вопросы из JSON</h3>
+            
+            <div class="form-group">
+                <label class="form-label">Выберите JSON файл с вопросами</label>
+                <input type="file" id="jsonFile" accept=".json" class="form-input">
+            </div>
+            
+            <button id="uploadBtn" class="btn btn-primary">Загрузить</button>
+            
+            <div id="uploadMessage" style="margin-top: 1rem;"></div>
+        </div>
+        
+        <div class="card">
+            <h3 class="card-header">Формат JSON файла</h3>
+            <pre style="background-color: var(--bg-secondary); padding: 1rem; border-radius: 0.375rem; overflow-x: auto; font-size: 0.875rem;">
+{
+  "questions": [
+    {
+      "text": "Какая столица России?",
+      "order": 1,
+      "is_multiple": false,
+      "image": null,
+      "answers": [
+        {"text": "Москва", "is_correct": true},
+        {"text": "Санкт-Петербург", "is_correct": false},
+        {"text": "Новосибирск", "is_correct": false}
+      ]
+    },
+    {
+      "text": "Выберите языки программирования:",
+      "order": 2,
+      "is_multiple": true,
+      "image": null,
+      "answers": [
+        {"text": "Python", "is_correct": true},
+        {"text": "JavaScript", "is_correct": true},
+        {"text": "HTML", "is_correct": false}
+      ]
+    }
+  ]
+}
+            </pre>
+            <p class="card-body">
+                <strong>Поля:</strong><br>
+                • <code>text</code> - текст вопроса (обязательно)<br>
+                • <code>order</code> - порядковый номер (обязательно)<br>
+                • <code>is_multiple</code> - множественный выбор (true/false)<br>
+                • <code>image</code> - URL изображения или null<br>
+                • <code>answers</code> - массив вариантов ответа (обязательно)<br>
+                • <code>is_correct</code> - правильный ответ (true/false)
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/admin_create.js') }}"></script>
+{% endblock %}

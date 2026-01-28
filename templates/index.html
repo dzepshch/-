@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% set show_navbar = True %}
+
+{% block content %}
+<div class="container" style="padding-top: 4rem;">
+    <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+        <h1 style="font-size: 3rem; margin-bottom: 1rem; color: var(--primary-green);">
+            Добро пожаловать в онлайн-тренажер тестов
+        </h1>
+        <p style="font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 3rem;">
+            Проходите тесты, отслеживайте свой прогресс и улучшайте свои знания
+        </p>
+        
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            <a href="{{ url_for('register') }}" class="btn btn-primary" style="font-size: 1.125rem; padding: 0.875rem 2rem;">
+                Начать бесплатно
+            </a>
+            <a href="{{ url_for('login') }}" class="btn btn-secondary" style="font-size: 1.125rem; padding: 0.875rem 2rem;">
+                Войти
+            </a>
+        </div>
+    </div>
+    
+    <div style="margin-top: 5rem;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+            <div class="card" style="text-align: center;">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">📊</div>
+                <h3 class="card-header">Отслеживание прогресса</h3>
+                <p class="card-body">Смотрите свою статистику и результаты по каждому тесту</p>
+            </div>
+            
+            <div class="card" style="text-align: center;">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">⏱️</div>
+                <h3 class="card-header">Гибкие настройки</h3>
+                <p class="card-body">Выбирайте режим с таймером или без него</p>
+            </div>
+            
+            <div class="card" style="text-align: center;">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">✅</div>
+                <h3 class="card-header">Мгновенная проверка</h3>
+                <p class="card-body">Получайте правильные ответы сразу после каждого вопроса</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

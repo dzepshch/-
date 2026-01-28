@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "text": "Какая столица России?",
+      "order": 1,
+      "is_multiple": false,
+      "image": null,
+      "answers": [
+        {"text": "Москва", "is_correct": true},
+        {"text": "Санкт-Петербург", "is_correct": false},
+        {"text": "Новосибирск", "is_correct": false},
+        {"text": "Екатеринбург", "is_correct": false}
+      ]
+    },
+    {
+      "text": "Выберите языки программирования:",
+      "order": 2,
+      "is_multiple": true,
+      "image": null,
+      "answers": [
+        {"text": "Python", "is_correct": true},
+        {"text": "JavaScript", "is_correct": true},
+        {"text": "HTML", "is_correct": false},
+        {"text": "CSS", "is_correct": false}
+      ]
+    },
+    {
+      "text": "Сколько будет 2 + 2?",
+      "order": 3,
+      "is_multiple": false,
+      "image": null,
+      "answers": [
+        {"text": "3", "is_correct": false},
+        {"text": "4", "is_correct": true},
+        {"text": "5", "is_correct": false},
+        {"text": "22", "is_correct": false}
+      ]
+    },
+    {
+      "text": "Какие из этих фреймворков являются frontend?",
+      "order": 4,
+      "is_multiple": true,
+      "image": null,
+      "answers": [
+        {"text": "React", "is_correct": true},
+        {"text": "Vue.js", "is_correct": true},
+        {"text": "Django", "is_correct": false},
+        {"text": "Flask", "is_correct": false}
+      ]
+    },
+    {
+      "text": "Что означает аббревиатура HTML?",
+      "order": 5,
+      "is_multiple": false,
+      "image": null,
+      "answers": [
+        {"text": "HyperText Markup Language", "is_correct": true},
+        {"text": "High-Level Text Modeling Language", "is_correct": false},
+        {"text": "Home Tool Markup Language", "is_correct": false},
+        {"text": "Hyperlinks and Text Markup Language", "is_correct": false}
+      ]
+    }
+  ]
+}

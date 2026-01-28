@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% set show_navbar = False %}
+
+{% block content %}
+<nav class="navbar">
+    <div class="container">
+        <a href="{{ url_for('admin_panel') }}" class="navbar-brand">🔧 Админ-панель</a>
+        <div class="navbar-menu">
+            <a href="{{ url_for('admin_logout') }}" class="navbar-link">Выход</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container" style="padding-top: 2rem;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+        <h1>Управление тестами</h1>
+        <a href="{{ url_for('admin_create_test') }}" class="btn btn-primary">+ Создать тест</a>
+    </div>
+    
+    {% if tests %}
+    <div class="card">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Название</th>
+                    <th>Описание</th>
+                    <th>Создан</th>
+                    <th>Статус</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for test in tests %}
+                <tr>
+                    <td>{{ test.id }}</td>
+                    <td>{{ test.title }}</td>
+                    <td>{{ test.description or '-' }}</td>
+                    <td>{{ test.created_at[:10] }}</td>
+                    <td>
+                        <span style="color: {{ 'var(--primary-green)' if test.is_active else 'var(--text-secondary)' }}; font-weight: 500;">
+                            {{ 'Активен' if test.is_active else 'Неактивен' }}
+                        </span>
+                    </td>
+                    <td>
+                        <button class="btn btn-secondary" onclick="toggleTest({{ test.id }})" style="padding: 0.375rem 0.75rem; margin-right: 0.5rem;">
+                            {{ 'Выключить' if test.is_active else 'Включить' }}
+                        </button>
+                        <button class="btn btn-danger" onclick="deleteTest({{ test.id }})" style="padding: 0.375rem 0.75rem;">
+                            Удалить
+                        </button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="card">
+        <p class="card-body">Тестов пока нет. Создайте первый тест!</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/admin_panel.js') }}"></script>
+{% endblock %}
