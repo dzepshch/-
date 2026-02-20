@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VPN Config Loader</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        min-width: 280px;
+        margin: 12px;
+      }
+      .row {
+        margin-bottom: 10px;
+      }
+      select,
+      button {
+        width: 100%;
+        padding: 8px;
+      }
+      .hint {
+        color: #555;
+        font-size: 12px;
+      }
+      .status {
+        margin-top: 8px;
+        font-size: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="row">
+      <label for="configSelect">Saved configurations</label>
+      <select id="configSelect"></select>
+    </div>
+
+    <div class="row">
+      <button id="connectBtn">Connect</button>
+    </div>
+
+    <div class="row">
+      <button id="disconnectBtn">Disconnect</button>
+    </div>
+
+    <div class="row">
+      <button id="openOptionsBtn">Manage configs</button>
+    </div>
+
+    <p class="hint">Supports custom proxy-style VPN configs imported on the options page.</p>
+    <div class="status" id="status"></div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
