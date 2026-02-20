@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "VPN Config Loader",
+  "description": "Browser extension for importing and managing custom VPN configurations.",
+  "version": "1.0.0",
+  "permissions": [
+    "storage",
+    "proxy"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "VPN Config Loader",
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html"
+}
